@@ -24,6 +24,22 @@ public class createuser extends javax.swing.JFrame {
         String password="123a";
 private void getdata()
 {
+    DefaultTableModel model =(DefaultTableModel)jtable1.getModel();
+    model.setRowCount(0);
+    try{
+        Connection con= DriverManager.getConnection(host,username,password);
+        Statement stmt= con.createStatement();
+        String query="select * from login";
+        ResultSet rs=stmt.executeQuery(query);
+        while(rs.next())
+        {
+            model.addRow(new Object[]{rs.getString("name"),rs.getString("username"),rs.getString("password"),rs.getString("type")rs.getInt("id")});
+        }
+    }
+    catch(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Error"+e);
+    }
     
 }
     
